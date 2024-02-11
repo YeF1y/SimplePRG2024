@@ -7,7 +7,8 @@ public class InteractableObject : MonoBehaviour
 {
     private NavMeshAgent playerAgent;
     private bool haveInteracted = false;
-    public void Onclick(NavMeshAgent playerAgent)
+
+    public void OnClick(NavMeshAgent playerAgent)
     {
         this.playerAgent = playerAgent;
         playerAgent.stoppingDistance = 2;
@@ -18,9 +19,9 @@ public class InteractableObject : MonoBehaviour
 
     private void Update()
     {
-        if(playerAgent != null && haveInteracted == false && playerAgent.pathPending == false)
+        if (playerAgent != null && haveInteracted == false && playerAgent.pathPending == false)
         {
-            if (playerAgent.remainingDistance <= 2) 
+            if (playerAgent.remainingDistance <= 2)
             {
                 Interact();
                 haveInteracted = true;

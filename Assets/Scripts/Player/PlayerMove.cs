@@ -6,11 +6,11 @@ using UnityEngine.EventSystems;
 
 public class PlayerMove : MonoBehaviour
 {
-    private NavMeshAgent playAgent;
+    private NavMeshAgent playerAgent;
     // Start is called before the first frame update
     void Start()
     {
-        playAgent = GetComponent<NavMeshAgent>();
+        playerAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -19,19 +19,21 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
             RaycastHit hit;
             bool isCollide = Physics.Raycast(ray, out hit);
-            if(isCollide)
+            if (isCollide)
             {
-                if(hit.collider.tag == "Ground")
+                if (hit.collider.tag == "Ground")
                 {
-                    playAgent.stoppingDistance = 0;
-                    playAgent.SetDestination(hit.point);
+                    playerAgent.stoppingDistance = 0;
+                    playerAgent.SetDestination(hit.point);
                 }
-                else if(hit.collider.tag == "Interactable")
+                else if (hit.collider.tag == "Interactable")
                 {
-                    hit.collider.GetComponent<InteractableObject>().Onclick(playAgent);
+                    hit.collider.GetComponent<InteractableObject>().OnClick(playerAgent);
                 }
+
             }
         }
     }
